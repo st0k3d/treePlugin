@@ -11,13 +11,9 @@ const Tree: React.FunctionComponent<Props> = (props:Props) => {
 
   const { treeData } = props;
 
-  const treeStyle = {
-    marginTop: '1em',
-  };
-
   return (
-    <div style={treeStyle}>
-      <ul className="tree-view">
+    <div className="tree">
+      <ul>
         {treeData.map((k, j) => (
           <Node
             node={k}

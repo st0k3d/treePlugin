@@ -1,6 +1,6 @@
+Modal animation? appear/disappear
+Modal body click close
 
-modal animation? appear/disappear & slide up/down
-css clean up
-code review
+Code Review
 
-package to run without build
+> run build again -> npm run build

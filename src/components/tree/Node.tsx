@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
+import SmoothCollapse from 'react-smooth-collapse';
 import { TreeNode } from '../../Models';
 
 interface Props {
@@ -26,7 +27,7 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
       return 15;
     }
 
-    return 25;
+    return 23;
   };
 
   const newPadding = padding + getPadding();
@@ -50,70 +51,43 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
     }
   };
 
-  const fileStyle = {
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap' as 'nowrap',
-    cursor: 'auto',
+  const treePadding = {
     paddingLeft: (`${newPadding}px`),
-    fontSize: '.85em',
-  };
-
-  const plusMinusStyle = {
-    marginRight: '.75em',
-    cursor: 'pointer',
-  };
-
-  const folderStyle = {
-    marginRight: '.4em',
-    cursor: 'pointer',
-  };
-
-  const folderDiv = {
-    fontSize: '.85em',
-    paddingLeft: (`${newPadding}px`),
-  };
-
-  const fileIconStyle = {
-    marginRight: '.7em',
   };
 
   const getPlusMinusClass = () => {
     if (isOpen) {
       if (selectedId === node.id) {
-        return 'white-minus-icon';
+        return 'white-minus-icon white-icon';
       }
 
-      return 'black-minus-icon';
+      return 'black-minus-icon black-icon';
     }
 
     if (selectedId === node.id) {
-      return 'white-plus-icon';
+      return 'white-plus-icon white-icon';
     }
 
-    return 'black-plus-icon';
+    return 'black-plus-icon black-icon';
   };
 
   return (
     <>
       {node.type === 'Folder' ? (
         <>
-          <li
-            className="tree-view-node"
-          >
-            <div onClick={(e) => handleSelection(e, node.id)} style={folderDiv} className={`tree-item ${isSelected() ? 'tree-item-selected' : ''}`}>
+          <li>
+            <div onClick={(e) => handleSelection(e, node.id)} style={treePadding} className={`tree-file-folder ${isSelected() ? 'tree-item-selected' : ''}`}>
               <span
-                style={plusMinusStyle}
-                className={getPlusMinusClass()}
+                className={`plus-minus ${getPlusMinusClass()}`}
                 onClick={handleFolderClick}
               />
-              <span style={folderStyle} onClick={handleFolderClick} className={node.tag === 'HEAD' ? 'private-folder-icon' : 'public-folder-icon'} />
-              {' '}
+              <span onClick={handleFolderClick} className={`folder ${node.tag === 'HEAD' ? 'private-folder-icon' : 'public-folder-icon'}`} />
               {node.tag?.toLowerCase()}
             </div>
-            {isOpen && node.children && node.children.length > 0
+            <SmoothCollapse expanded={isOpen}>
+              {node.children && node.children.length > 0
                     && (
-                    <ul className="tree-view">
+                    <ul>
                       {node.children.map((k, j) => (
                         <Node
                           node={k}
@@ -125,12 +99,13 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
                       ))}
                     </ul>
                     )}
+            </SmoothCollapse>
           </li>
         </>
       ) : (
-        <li className="tree-view-node">
-          <div style={fileStyle} onClick={(e) => handleSelection(e, node.id)} className={`tree-item ${isSelected() ? 'tree-item-selected' : ''}`}>
-            <span style={fileIconStyle} className="file-icon" />
+        <li>
+          <div style={treePadding} onClick={(e) => handleSelection(e, node.id)} className={`tree-file tree-file-folder ${isSelected() ? 'tree-item-selected' : ''}`}>
+            <span className="file file-icon" />
             {node.text}
           </div>
         </li>

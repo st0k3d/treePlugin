@@ -20,6 +20,7 @@ TreeNode[] => {
       treeNodeObj.children = [];
     }
   }
+
   // This is a text node that contains alphanumeric characters
   else if (node.nodeType === 3 && node.textContent?.match(/[a-z]/i)) {
     treeNodeObj.type = 'File';

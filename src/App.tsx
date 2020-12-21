@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import RootView from './components/views/RootView';
 
 const App = () => (

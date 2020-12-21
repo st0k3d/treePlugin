@@ -1,0 +1,249 @@
+/* WOULD NORMALLY BE USING CSS FRAMEWORK SUCH AS BOOTSTRAP, MATERIAL, ANTD  ETC */
+
+$coatueBlue: #4285f4;
+$defaultFontSize: 0.85em;
+$fontColor: #666666;
+$pointer: pointer;
+
+.file-dropper-wrapper {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: #eeeeee;
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+  cursor: $pointer;
+}
+
+.tree {
+  margin-top: 1em;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+      color: $fontColor;
+
+      .tree-file {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: auto;
+      }
+
+      .tree-item-selected {
+        background-color: $coatueBlue;
+        color: white;
+      }
+
+      .tree-file-folder {
+        padding: 0.25em 0 0.25em 0;
+        font-size: $defaultFontSize;
+
+        span.plus-minus {
+          margin-right: 0.7em;
+          margin-bottom: 0.1em;
+          cursor: $pointer;
+        }
+
+        .black-icon {
+          opacity: 0.25;
+          &:hover {
+            opacity: 0.35;
+          }
+        }
+
+        .white-icon {
+          &:hover {
+            opacity: 0.85;
+          }
+        }
+
+        span.folder {
+          margin-right: 0.7em;
+          cursor: $pointer;
+        }
+
+        span.file {
+          margin-right: 0.7em;
+        }
+      }
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 640px;
+  background: white;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  .modal-title {
+    background-color: #f5f5f5;
+    overflow: hidden;
+    height: 3em;
+    border-bottom: thin solid #ccc;
+    border-radius: 4px 4px 0 0;
+
+    > :first-child {
+      margin-left: 1em;
+      float: left;
+      font-size: $defaultFontSize;
+      margin-top: 1.4em;
+    }
+
+    > :last-child {
+      margin-right: 1em;
+      margin-top: 1em;
+      float: right;
+      opacity: 0.25;
+      cursor: $pointer;
+      &:hover {
+        opacity: 0.35;
+      }
+    }
+  }
+
+  .modal-label {
+    border-bottom: thin solid #e8e8e8;
+    height: 1.5em;
+    box-shadow: 0px 2px 3px -2px #e8e8e8;
+
+    div {
+      font-size: $defaultFontSize;
+      opacity: 0.25;
+      margin-top: 1em;
+      margin-left: 1em;
+    }
+  }
+
+  .modal-content {
+    height: 78%;
+    overflow: scroll;
+  }
+
+  .modal-actions {
+    border-top: thin solid #ccc;
+    overflow: hidden;
+    height: 3em;
+
+    > :first-child {
+      float: left;
+      margin-top: 1.2em;
+      margin-left: 1em;
+
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: $coatueBlue;
+        font-size: $defaultFontSize;
+      }
+    }
+
+    > :last-child {
+      float: right;
+
+      button {
+        background-color: $coatueBlue;
+        color: white;
+        margin-top: 1em;
+        margin-right: 1em;
+        border-radius: 2px;
+        border: none;
+        width: 4.5em;
+        height: 2.25em;
+        font-size: $defaultFontSize;
+        cursor: $pointer;
+      }
+    }
+  }
+}
+
+/* ICONs */
+.public-folder-icon,
+.private-folder-icon,
+.file-icon,
+.black-plus-icon,
+.white-plus-icon,
+.black-minus-icon,
+.white-minus-icon,
+.close-icon {
+  background-image: url("./icon-sprite.png");
+  background-repeat: no-repeat;
+  position: relative;
+  top: 2px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.public-folder-icon {
+  background-position: 0 0;
+  width: 14px;
+  height: 14px;
+}
+
+.private-folder-icon {
+  background-position: -14px 0;
+  width: 14px;
+  height: 14px;
+}
+
+.file-icon {
+  background-position: -29px 0;
+  width: 12px;
+  height: 14px;
+}
+
+.black-plus-icon {
+  background-position: -58px -2px;
+  width: 9px;
+  height: 9px;
+}
+
+.white-plus-icon {
+  background-position: -86px -2px;
+  width: 9px;
+  height: 9px;
+}
+
+.black-minus-icon {
+  background-position: -72px -2px;
+  width: 9px;
+  height: 9px;
+}
+
+.white-minus-icon {
+  background-position: -100px -2px;
+  width: 9px;
+  height: 9px;
+}
+
+.close-icon {
+  background-position: -43px -1px;
+  width: 12px;
+  height: 12px;
+}

@@ -3,7 +3,7 @@ import Tree from '../Tree';
 import FileDropper from '../FileDropper';
 import Modal from '../Modal';
 import { TreeNode } from '../../Models';
-import { ALLOWED_FILE_TYPES, MAX_ALLOWED_FILE_UPLOAD } from '../../constants';
+import { ALLOWED_FILE_TYPES, COATUE_URL, MAX_ALLOWED_FILE_UPLOAD } from '../../constants';
 import { parseHtmlStringToElement, domWalker } from '../../Utils';
 
 const RootView: React.FunctionComponent = () => {
@@ -54,13 +54,12 @@ const RootView: React.FunctionComponent = () => {
     title: 'Title',
     setIsOpen: setIsModalOpen,
     isOpen: isModalOpen,
+    url: COATUE_URL,
   };
 
   return (
     <div>
-      <div
-        className="file-dropper-wrapper"
-      >
+      <div className="file-dropper-wrapper">
         <FileDropper {...fileDropperProps} />
       </div>
       <Modal {...modalProps} />
