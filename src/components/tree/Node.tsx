@@ -14,9 +14,12 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
   const {
     node, padding, selectedId, setSelectedId,
   } = props;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const isSelected = () => selectedId === node.id;
+
+  const folderHasContent = ():boolean => (!!(node.children && node.children.length > 0));
 
   const getPadding = ():number => {
     if (node.type === 'File') {
@@ -34,8 +37,8 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
 
   // Double click
   const handleFolderClick = (e: { stopPropagation: () => void; }) => {
-    e.stopPropagation();
-    if (node.type === 'Folder') {
+    if (folderHasContent()) {
+      e.stopPropagation();
       setIsOpen(!isOpen);
     }
   };
@@ -51,9 +54,11 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
     }
   };
 
-  const treePadding = {
-    paddingLeft: (`${newPadding}px`),
-  };
+  const shouldShowPlusMinus = () => (!folderHasContent() ? { opacity: 0, cursor: 'default' }
+    : {});
+
+  const shouldHaveFolderPointerCursor = () => (!folderHasContent() ? { cursor: 'default' }
+    : {});
 
   const getPlusMinusClass = () => {
     if (isOpen) {
@@ -71,6 +76,12 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
     return 'black-plus-icon black-icon';
   };
 
+  const getFolderIconClass = () => (node.tag === 'HEAD' ? 'private-folder-icon' : 'public-folder-icon');
+
+  const treePadding = {
+    paddingLeft: (`${newPadding}px`),
+  };
+
   return (
     <>
       {node.type === 'Folder' ? (
@@ -78,10 +89,11 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
           <li>
             <div onClick={(e) => handleSelection(e, node.id)} style={treePadding} className={`tree-file-folder ${isSelected() ? 'tree-item-selected' : ''}`}>
               <span
+                style={shouldShowPlusMinus()}
                 className={`plus-minus ${getPlusMinusClass()}`}
                 onClick={handleFolderClick}
               />
-              <span onClick={handleFolderClick} className={`folder ${node.tag === 'HEAD' ? 'private-folder-icon' : 'public-folder-icon'}`} />
+              <span onClick={handleFolderClick} style={shouldHaveFolderPointerCursor()} className={`folder ${getFolderIconClass()}`} />
               {node.tag?.toLowerCase()}
             </div>
             <SmoothCollapse expanded={isOpen}>
