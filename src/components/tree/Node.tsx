@@ -33,7 +33,7 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
   const newPadding = padding + getPadding();
 
   // Double click
-  const handleFolderClick = (e:any) => {
+  const handleFolderClick = (e: { stopPropagation: () => void; }) => {
     e.stopPropagation();
     if (node.type === 'Folder') {
       setIsOpen(!isOpen);
@@ -41,7 +41,7 @@ const Node: React.FunctionComponent<Props> = (props:Props) => {
   };
 
   // Single click
-  const handleSelection = (e:any, nodeId:string) => {
+  const handleSelection = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, nodeId:string) => {
     e.preventDefault();
 
     if (isSelected()) {
