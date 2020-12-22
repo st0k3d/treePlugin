@@ -10,7 +10,7 @@ const RootView: React.FunctionComponent = () => {
   const [treeData, setTreeData] = useState<TreeNode[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const readTextFileAsync = (file:any):
+  const readTextFileAsync = (file: Blob):
   Promise<string | ArrayBuffer | null> => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -30,7 +30,7 @@ const RootView: React.FunctionComponent = () => {
   const convertFileToTreeNode = async (files:Blob[]):Promise<void> => {
     const htmlString = await getFileAsString(files);
     const htmlElement = parseHtmlStringToElement(htmlString);
-    const treeNodes = domWalker(htmlElement, [], 0, 1);
+    const treeNodes = domWalker(htmlElement, [], 0);
     setTreeData(treeNodes);
     if (!isModalOpen) {
       setIsModalOpen(true);

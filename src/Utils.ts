@@ -6,10 +6,10 @@ export const parseHtmlStringToElement = (html:string):HTMLElement => {
   return doc.firstElementChild as HTMLElement;
 };
 
-export const domWalker = (node:HTMLElement, array:TreeNode[], parentDepth:number, depth:number):
+export const domWalker = (node:HTMLElement, array:TreeNode[], depth:number):
 TreeNode[] => {
   const treeNodeObj:TreeNode = {
-    id: `node-${parentDepth}-${depth}-${uuidv4()}`,
+    id: `node-${depth}-${uuidv4()}`,
   };
 
   // This is an element
@@ -32,15 +32,14 @@ TreeNode[] => {
   }
 
   node = node.firstChild as HTMLElement;
-  parentDepth += 1;
+  depth += 1;
   while (node) {
     if (treeNodeObj.children) {
-      treeNodeObj.children = domWalker(node, treeNodeObj.children, parentDepth, depth);
+      treeNodeObj.children = domWalker(node, treeNodeObj.children, depth);
     } else {
-      array = domWalker(node, array, parentDepth, depth);
+      array = domWalker(node, array, depth);
     }
     node = node.nextSibling as HTMLElement;
-    depth += 1;
   }
 
   return array;
